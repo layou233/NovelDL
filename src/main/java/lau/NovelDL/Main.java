@@ -34,6 +34,7 @@ public class Main {
                         "| | \\  | | |_| | | |/ /    | |___  | |___  | |_| | | |___  \n" +
                         "|_|  \\_| \\_____/ |___/     |_____| |_____| |_____/ |_____| "
         );
+        UpdateCheck.updateCheck();
         System.out.print("Enter the first page URL of the novel: ");
         firstPageURL = KotlinFunctionsKt.readln().trim();
         try {
@@ -65,7 +66,7 @@ public class Main {
         try { // First dumping
             String s = replacer(Weber.getWebString(currentPageURL, "UTF-8"));
             charset = NovelInfosKt.getCharset(s);
-            if (charset != "UTF.8")
+            if (!charset.equals("UTF.8"))
                 s = replacer(Weber.getWebString(currentPageURL, charset));
             String chapter = NovelInfosKt.getChapterTitle(s);
             fileOutputStream.write(chapter.getBytes(StandardCharsets.UTF_8));
@@ -77,7 +78,7 @@ public class Main {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (HTTPException e) {
-            System.out.println(dumpCount + " FAILED:Target website responsed Code " + e.getStatusCode());
+            System.out.println(dumpCount + " FAILED:Target website responded Code " + e.getStatusCode());
         } catch (NullPointerException e) {
             System.out.println("It doesn't seem to be a novel. Do your IP got banned?");
             return;
@@ -98,7 +99,7 @@ public class Main {
             } catch (IOException e) {
                 System.out.println(e.getMessage());
             } catch (HTTPException e) {
-                System.out.println(dumpCount + " FAILED:Target website responsed Code " + e.getStatusCode());
+                System.out.println(dumpCount + " FAILED:Target website responded Code " + e.getStatusCode());
             } catch (NullPointerException e) {
                 System.out.println(dumpCount + " FAILED:It doesn't seem to be a novel. REDUMPING IN 10 SECONDS...");
                 Thread.sleep(10000);

@@ -33,7 +33,7 @@ public class Weber {
             InputStream is = connection.getInputStream();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             byte[] buffer = new byte[10485760]; // 10MiB Buffer
-            int len = 0;
+            int len;
             while ((len = is.read(buffer)) != -1) {
                 baos.write(buffer, 0, len);
             }

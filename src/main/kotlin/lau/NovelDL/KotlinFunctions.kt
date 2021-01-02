@@ -1,8 +1,5 @@
 package lau.NovelDL
 
-import java.net.URL
-import java.nio.charset.Charset
-
 /**
  * NovelDL, the best application for Chinese readers
  *
