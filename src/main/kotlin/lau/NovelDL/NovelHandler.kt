@@ -11,7 +11,7 @@ import java.lang.NullPointerException
 fun readNovel(plain: String): String {
     // Get the main part of the novel
     val novelStart: Int = plain.indexOf("<divid=\"content\"")
-    if (novelStart == -1) throw NullPointerException("Not novel");
+    if (novelStart == -1) throw NullPointerException("Not novel")
     var novel: String = plain.substring(
         plain.indexOf('>', novelStart) + 1,
         plain.indexOf("</div>", novelStart)
@@ -24,7 +24,7 @@ fun readNovel(plain: String): String {
     novel = Regex("&quot;").replace(novel, "\"")
 
     // Process "</br>"s
-    novel = Regex("<br/>").replace(novel, "\n")
+    novel = Regex("<br/?>").replace(novel, "\n")
 
     // Remove "<a href=url></a>"s
     novel = removePartsFromString(novel, "<ahref", "</a>", "")
