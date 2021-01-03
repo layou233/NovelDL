@@ -23,7 +23,7 @@ fun readNovel(plain: String): String {
     // Process "&quot;"s
     novel = Regex("&quot;").replace(novel, "\"")
 
-    // Process "</br>"s
+    // Process "<br/?>"s
     novel = Regex("<br/?>").replace(novel, "\n")
 
     // Remove "<a href=url></a>"s
