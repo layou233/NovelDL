@@ -1,5 +1,7 @@
 package lau.NovelDL;
 
+import lau.NovelDL.utils.LoadFileResource;
+
 import java.io.IOException;
 
 /**
@@ -9,7 +11,7 @@ import java.io.IOException;
  */
 
 public class UpdateCheck {
-    public static String version = "1.0";
+    public static String version = LoadFileResource.loadFile("version.txt");
 
     public static void updateCheck() {
         System.out.println("Version " + version);

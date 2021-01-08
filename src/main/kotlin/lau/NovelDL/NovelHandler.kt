@@ -18,10 +18,10 @@ fun readNovel(plain: String): String {
     )
 
     // Process "&nbsp;"s
-    novel = Regex("&nbsp;").replace(novel, " ")
+    novel = novel.replace("&nbsp;"," ")
 
     // Process "&quot;"s
-    novel = Regex("&quot;").replace(novel, "\"")
+    novel = novel.replace("&&quot;","\"")
 
     // Process "<br/?>"s
     novel = Regex("<br/?>").replace(novel, "\n")
@@ -33,7 +33,7 @@ fun readNovel(plain: String): String {
     novel = removePartsFromString(novel, "<p", ">", "\n")
 
     // Process "</p>"s
-    novel = Regex("</p>").replace(novel, "\n")
+    novel = novel.replace("</p>","\n")
 
     return "\n\n" + novel + "\n\n"
 }
