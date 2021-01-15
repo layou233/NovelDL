@@ -21,7 +21,7 @@ fun readNovel(plain: String): String {
     novel = novel.replace("&nbsp;"," ")
 
     // Process "&quot;"s
-    novel = novel.replace("&&quot;","\"")
+    novel = novel.replace("&quot;","\"")
 
     // Process "<br/?>"s
     novel = Regex("<br/?>").replace(novel, "\n")
