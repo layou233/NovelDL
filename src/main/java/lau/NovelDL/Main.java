@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 public class Main {
     public static String firstPageURL;
     public static String domain;
-    public static String charset;
+    public static String charset="UTF-8";
     public static File file;
 
     public static String replacer(String s) {
@@ -61,14 +61,16 @@ public class Main {
         long dumpCount = 1; // I am a cautious person, so I used long type lol
         String currentPageURL = firstPageURL;
         String listId = null;
-        long startTime = System.currentTimeMillis() / 1000;
+        final long startTime = System.currentTimeMillis() / 1000;
 
         try { // First dumping
-            String s = replacer(Weber.getWebString(currentPageURL, "UTF-8"));
-            charset = NovelInfosKt.getCharset(s);
-            if (!charset.equals("UTF.8"))
-                s = replacer(Weber.getWebString(currentPageURL, charset));
-            String chapter = NovelInfosKt.getChapterTitle(s);
+            String s = replacer(Weber.getWebString(currentPageURL, charset));
+            try {
+                charset = NovelInfosKt.getCharset(s);
+                if (!charset.equals("UTF-8"))
+                    s = replacer(Weber.getWebString(currentPageURL, charset));
+            } catch (IOException ignored) {}
+            final String chapter = NovelInfosKt.getChapterTitle(s);
             fileOutputStream.write(chapter.getBytes(StandardCharsets.UTF_8));
             fileOutputStream.write(NovelHandlerKt.readNovel(s).getBytes(StandardCharsets.UTF_8));
             currentPageURL = NovelInfosKt.getUrlFromHrefValue(s, "下一章");
@@ -76,6 +78,7 @@ public class Main {
             currentPageURL = domain + currentPageURL;
             System.out.println(dumpCount++ + " Successfully dumped " + chapter);
         } catch (IOException e) {
+            e.printStackTrace();
             System.out.println(e.getMessage());
         } catch (HTTPException e) {
             System.out.println(dumpCount + " FAILED:Target website responded Code " + e.getStatusCode());
@@ -86,8 +89,8 @@ public class Main {
 
         while (true) {
             try {
-                String s = replacer(Weber.getWebString(currentPageURL, charset));
-                String chapter = NovelInfosKt.getChapterTitle(s);
+                final String s = replacer(Weber.getWebString(currentPageURL, charset));
+                final String chapter = NovelInfosKt.getChapterTitle(s);
                 fileOutputStream.write(chapter.getBytes(StandardCharsets.UTF_8));
                 fileOutputStream.write(NovelHandlerKt.readNovel(s).getBytes(StandardCharsets.UTF_8));
                 currentPageURL = NovelInfosKt.getUrlFromHrefValue(s, "下一章");
@@ -97,6 +100,7 @@ public class Main {
                 if (dumpCount % 5 == 0) Thread.sleep(2000);
 
             } catch (IOException e) {
+                e.printStackTrace();
                 System.out.println(e.getMessage());
             } catch (HTTPException e) {
                 System.out.println(dumpCount + " FAILED:Target website responded Code " + e.getStatusCode());

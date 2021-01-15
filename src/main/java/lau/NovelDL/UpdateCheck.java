@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 
 public class UpdateCheck {
-    public static String version = LoadFileResource.loadFile("version.txt");
+    public final static String version = LoadFileResource.loadFile("version.txt");
 
     public static void updateCheck() {
         System.out.println("Version " + version);

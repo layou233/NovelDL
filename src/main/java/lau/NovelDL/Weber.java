@@ -16,7 +16,7 @@ import java.net.URL;
 public class Weber {
     // If there is a network error, an IOException will be thrown to remind the user
     public static String getWebString(String url, String charset) throws IOException {
-        URL realUrl = new URL(url);
+        final URL realUrl = new URL(url);
         HttpURLConnection connection = (HttpURLConnection) realUrl.openConnection();
         connection.setRequestProperty("accept", "*/*");
         connection.setRequestProperty("connection", "Keep-Alive");
