@@ -20,5 +20,5 @@ fun getListIdFromUrl(url: String): String = url.substring(0, url.lastIndexOf("/"
 
 fun getCharset(s: String): String {
     var i: Int = s.indexOf("charset=") + 8
-    return s.substring(i, s.indexOf('"', i + 1)).toUpperCase()
+    return s.substring(i + 1, s.indexOf('"', i + 1)).toLowerCase()
 }
