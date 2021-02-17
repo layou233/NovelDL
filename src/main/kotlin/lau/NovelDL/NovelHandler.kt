@@ -23,6 +23,18 @@ fun readNovel(plain: String): String {
     // Process "&quot;"s
     novel = novel.replace("&quot;","\"")
 
+    // Process "&amp;"s
+    novel = novel.replace("&amp;","&")
+
+    // Process "&lt;"s
+    novel = novel.replace("&lt;","<")
+
+    // Process "&gt;"s
+    novel = novel.replace("&gt;",">")
+
+    // Process "&apos;"s
+    novel = novel.replace("&apos;","'")
+
     // Process "<br/?>"s
     novel = Regex("<br/?>").replace(novel, "\n")
 
